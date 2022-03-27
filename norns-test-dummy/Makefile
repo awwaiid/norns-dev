@@ -19,7 +19,6 @@ run:
 
 run-audio:
 	docker run --rm -it \
-		--device /dev/snd \
 		--group-add $(shell getent group audio | cut -d: -f3) \
 		--cap-add=SYS_NICE \
 		--cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
@@ -32,7 +31,7 @@ run-audio:
 		-p 10111:10111/udp \
 		--name norns-test-dummy \
 		-v ${PWD}/matronrc.lua:/home/we/norns/matronrc.lua \
-		-v ${PWD}/my_jackdrc:/etc/jackdrc \
+		-v /run/user/1000/pipewire-0:/run/pipewire/pipewire-0 \
 		wwinder/norns-test-dummy
 
 run-bash:

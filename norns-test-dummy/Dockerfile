@@ -29,6 +29,10 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/* && \
     pip3 install tmuxp==1.4.0
 
+# Slice in pipewire from debian-unstable muahahaha
+RUN echo "deb http://deb.debian.org/debian unstable main" >> /etc/apt/sources.list && apt-get update -q && apt-get install -qy --no-install-recommends pipewire pipewire-audio-client-libraries
+RUN apt-get install -qy --no-install-recommends libcairo2-dev libsdl2-dev tmuxp strace
+
 USER we
 WORKDIR /home/we
 
